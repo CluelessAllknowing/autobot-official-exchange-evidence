@@ -1,0 +1,41 @@
+name: Publish evidence release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'release_payload/**'
+      - '.github/workflows/publish-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruct and verify package
+        shell: bash
+        run: |
+          cat release_payload/chunk_*.txt > /tmp/evidence.b64
+          base64 --decode /tmp/evidence.b64 > autobot_official_exchange_evidence.zip
+          test "$(stat -c%s autobot_official_exchange_evidence.zip)" = "36116"
+          echo "64cfd5f91c7f8a78314755f992d2a1c8281e46b22ca007c6831fc6821bf0d4ea  autobot_official_exchange_evidence.zip" | sha256sum -c -
+          unzip -t autobot_official_exchange_evidence.zip
+
+      - name: Publish release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          TAG="evidence-2026-09-15"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" autobot_official_exchange_evidence.zip --clobber
+          else
+            gh release create "$TAG" autobot_official_exchange_evidence.zip \
+              --title "AutoBot official exchange evidence" \
+              --notes "Validated public official Binance/Bybit documentation evidence package. SHA-256: 64cfd5f91c7f8a78314755f992d2a1c8281e46b22ca007c6831fc6821bf0d4ea; size: 36116 bytes."
+          fi

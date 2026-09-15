@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "authoritative": false,
+    "authority_scope": "official published documentation example",
+    "basis": "Set Trading Stop",
+    "source_url": "https://bybit-exchange.github.io/docs/v5/position/trading-stop",
+    "captured_at": "2026-09-15T21:44:15Z",
+    "page_updated_at": null,
+    "contains_credentials": false,
+    "contains_personal_data": false,
+    "transformed": true,
+    "transformation": "wrapped in _meta; example body otherwise unchanged",
+    "purpose": "offline exchange-contract validation"
+  },
+  "example": {
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1672283125359
+  }
+}

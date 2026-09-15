@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "authoritative": false,
+    "authority_scope": "official published documentation example",
+    "basis": "Get Account Info",
+    "source_url": "https://bybit-exchange.github.io/docs/v5/account/account-info",
+    "captured_at": "2026-09-15T21:44:15Z",
+    "page_updated_at": null,
+    "contains_credentials": false,
+    "contains_personal_data": false,
+    "transformed": true,
+    "transformation": "wrapped in _meta; example body otherwise unchanged",
+    "purpose": "offline exchange-contract validation"
+  },
+  "example": {
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+      "marginMode": "REGULAR_MARGIN",
+      "updatedTime": "1697078946000",
+      "unifiedMarginStatus": 4,
+      "dcpStatus": "OFF",
+      "timeWindow": 10,
+      "smpGroup": 0,
+      "isMasterTrader": false,
+      "spotHedgingStatus": "OFF"
+    }
+  }
+}
